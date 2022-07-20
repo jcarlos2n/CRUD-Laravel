@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Log;
 
 class TaskController extends Controller
 {
+
     public function getTask()
     {
         try {
+
             Log::info("Getting all tasks");
             $tasks = Task::query('tasks')
                 ->get()
@@ -23,11 +25,14 @@ class TaskController extends Controller
                 'data' => $tasks
 
             ], 200);
+
         } catch (\Exception $exception) {
+
             Log::error("Error getting tasks: " . $exception->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Error getting task' . $exception->getMessage(),
+
             ], 500);
         }
     }
@@ -35,6 +40,7 @@ class TaskController extends Controller
     public function postTask(Request $request)
     {
         try {
+
             Log::info("Creating tasks");
             $title = $request->input("title");
             $name = $request->input("name");
@@ -54,23 +60,30 @@ class TaskController extends Controller
                 'success' => true,
                 "message" => "task created succesfully"
             ]);
+
         } catch (\Exception $exception) {
+
             Log::error("Error posting tasks: " . $exception->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Error posting task' . $exception->getMessage(),
             ], 500);
+
         }
     }
+
     public function updateTask(Request $request, $idtasks)
     {
         try {
+
+            Log::info("Updating tasks");
             $task = Task::find($idtasks);
             if (!$task) {
                 return response()->json([
                     "success" => true,
                     "message" => "Task doesnt exist"
                 ], 404);
+
             }
             $title = $request->input('title');
 
@@ -81,12 +94,44 @@ class TaskController extends Controller
                 "success" => true,
                 "message" => "Task updated"
             ], 200);
+
         } catch (\Exception $exception) {
             Log::error("Error updating tasks: " . $exception->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Error updating task' . $exception->getMessage(),
             ], 500);
+
         }
+    }
+
+    public function deleteTask($idtasks){
+        try {
+
+            Log::info("Deleting tasks");
+            $task = Task::find($idtasks);
+            if (!$task) {
+                return response()->json([
+                    "success" => true,
+                    "message" => "Task doesnt exist"
+                ], 404);
+
+            }
+            $task::destroy($idtasks);
+            return response()->json([
+                "success" => true,
+                "message" => "Task deleted"
+            ], 200);
+
+        } catch (\Exception $exception) {
+
+            Log::error("Error deleting tasks: " . $exception->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Error deleting task' . $exception->getMessage(),
+            ], 500);
+            
+        }
+
     }
 }

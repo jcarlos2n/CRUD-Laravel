@@ -40,3 +40,4 @@ Route::delete('/users/{id}', [UserController::class, 'deleteUser']);
 Route::get('/tasks', [TaskController::class, 'getTask']);
 Route::post('/tasks', [TaskController::class, 'postTask']);
 Route::put('/tasks/{idtasks}', [TaskController::class, 'updateTask']);
+Route::delete('/tasks/{idtasks}', [TaskController::class, 'deleteTask']);

@@ -17,15 +17,15 @@ class UserSeeder extends Seeder
         DB::table('users')->insert(
             [
                 'name' => 'Carlos',
-                'email' => 'carlos@gmail.com',
+                'email' => 'paco@gmail.com',
                 'password' => 'princess'
             ]
         );
         DB::table('users')->insert(
             [
                 'name' => 'Oscar',
-                'email' => 'oscar@gmail.com',
-                'password' => 'princess'
+                'email' => 'orcarD@gmail.com',
+                'password' => '123456'
             ]
         );
 

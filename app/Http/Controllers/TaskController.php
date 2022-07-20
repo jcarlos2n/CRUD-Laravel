@@ -43,14 +43,12 @@ class TaskController extends Controller
 
             Log::info("Creating tasks");
             $title = $request->input("title");
-            $name = $request->input("name");
             // $hecho = $request->input('hecho?');
             $user_id = $request->input("user_id");
             //instancio el nuevo modelo
             $task = new Task();
             //guardo los atributos
             $task->title = $title;
-            $task->name = $name;
             // $task->hecho = $hecho;
             $task->user_id = $user_id;
             //guardo los atributos en bbdd
